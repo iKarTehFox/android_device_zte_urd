@@ -33,6 +33,7 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Permissions
 PRODUCT_COPY_FILES += \
+    device/zte/urd/privapp-permissions-com.qualcomm.location.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-com.qualcomm.location.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
@@ -110,6 +111,13 @@ PRODUCT_COPY_FILES +=  \
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
+
+# ADB during boot
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=adb \
+    persist.adb.notify=0 \
+    ro.adb.secure=0 \
+    ro.debuggable=1
 
 # Dalvik
 PRODUCT_PROPERTY_OVERRIDES += \

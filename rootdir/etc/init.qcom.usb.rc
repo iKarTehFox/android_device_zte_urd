@@ -33,6 +33,17 @@ on charger
     setprop sys.usb.config mass_storage
     setprop sys.usb.ffs.aio_compat 1
 
+# ADB only (used for debugging during boot)
+on property:sys.usb.config=adb
+    stop adbd
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 05C6
+    write /sys/class/android_usb/android0/idProduct 901d
+    write /sys/class/android_usb/android0/functions adb
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
+
 # MTP
 on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
