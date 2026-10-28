@@ -59,8 +59,14 @@ PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.urd
 
 # LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-legacymm
+# The legacymm HAL cannot work on this device: the kernel's display driver
+# does not implement the picture-adjustment ioctl (MSMFB_MDP_PP) that
+# libmm-disp-apis.so requires, and reports zero display modes. The service
+# would crash-loop forever (init restarts it every 5s), burning CPU and
+# spamming logcat. Night Light, Reading mode and Color calibration all work
+# without it -- see the config_setColorTransformAccelerated overlay.
+#PRODUCT_PACKAGES += \
+#    vendor.lineage.livedisplay@2.0-service-legacymm
 
 # Net
 PRODUCT_PACKAGES += \

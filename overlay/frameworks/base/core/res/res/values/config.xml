@@ -382,4 +382,10 @@
 
     <!-- Whether notify fingerprint client of successful cancelled authentication -->
     <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+
+    <!-- Night Light / color temperature.
+         The framework hides Night Light unless this is true. The display
+         hardware supports color transforms, but the device tree never set
+         this, so Night Light was missing from Settings entirely. -->
+    <bool name="config_setColorTransformAccelerated">true</bool>
 </resources>
